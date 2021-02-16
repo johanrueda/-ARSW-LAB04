@@ -26,9 +26,9 @@ public class Blueprint {
         points=new ArrayList<>();
     }
 
-    public Blueprint() {
-    }    
-    
+    public Blueprint(String johan, String significado, ArrayList<Point> puntos) {
+    }
+
     public String getName() {
         return name;
     }

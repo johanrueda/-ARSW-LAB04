@@ -10,6 +10,9 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -67,6 +70,19 @@ public class InMemoryPersistenceTest {
         }
                 
         
+    }
+
+    @Test
+    public void getBluePrintsByAuthorTest(){
+        InMemoryBlueprintPersistence iBlue = new InMemoryBlueprintPersistence();
+        ArrayList<Point> puntos = new ArrayList<>(Arrays.asList(new Point(0, 0), new Point(10, 10)));
+        Blueprint bp = new Blueprint("Johan", "Significado",puntos);
+
+        try {
+            iBlue.saveBlueprint(bp);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Fallo al insertar");
+        }
     }
 
 
