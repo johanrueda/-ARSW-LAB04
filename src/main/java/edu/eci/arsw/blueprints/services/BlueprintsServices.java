@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.blueprints.services;
 
+import edu.eci.arsw.blueprints.filter.BluePrintFilter;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
@@ -29,6 +30,11 @@ public class BlueprintsServices {
     @Autowired
     @Qualifier("inMemoryBluePrintPersistence")
     BlueprintsPersistence bpp=null;
+
+    @Autowired
+    @Qualifier("subsamplingFilter")
+
+    BluePrintFilter f;
 
     Set<Blueprint> bluePrints = new HashSet<>();
 
@@ -55,7 +61,7 @@ public class BlueprintsServices {
      */
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
         try{
-            return bpp.getBlueprint(author,name);
+            return  f.filter(bpp.getBlueprint(author,name));
         } catch (BlueprintNotFoundException e) {
             throw new UnsupportedOperationException("Not supported yet.");
         }
